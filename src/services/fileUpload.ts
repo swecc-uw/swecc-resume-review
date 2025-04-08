@@ -2,8 +2,6 @@ export const uploadFile = async (
   file: File,
   presignedUrl: string
 ): Promise<string> => {
-  console.log(file.name);
-
   const options = {
     method: 'PUT',
     body: file,
