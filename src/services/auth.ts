@@ -6,7 +6,10 @@ interface LoginParams {
   password: string;
 }
 
-const login = async ({ username, password }: LoginParams): Promise<boolean> => {
+export const login = async ({
+  username,
+  password,
+}: LoginParams): Promise<boolean> => {
   const response = await api.post('/auth/login/', {
     username,
     password,
@@ -18,12 +21,10 @@ const login = async ({ username, password }: LoginParams): Promise<boolean> => {
     throw new Error(`Login failed: ${response.data.detail ?? 'Unknown error'}`);
   }
 
-  getCSRF();
-
   return true;
 };
 
-const logout = async (): Promise<boolean> => {
+export const logout = async (): Promise<boolean> => {
   const response = await api.post('/auth/logout/');
 
   devPrint('Logout response:', response);
@@ -44,7 +45,7 @@ interface RegisterParams {
   discordUsername: string;
 }
 
-const register = async ({
+export const register = async ({
   username,
   password,
   email,
