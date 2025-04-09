@@ -6,8 +6,8 @@
   let password = '';
 
   const handleLogin = async () => {
-    if (await login({username, password})) {
-      goto("/");
+    if (await login({ username, password })) {
+      goto("/app");
     }
   };
 </script>
