@@ -7,18 +7,17 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const getCSRF = async (config: InternalAxiosRequestConfig<any>) => {
+export const getCSRF = async () => {
   try {
     const response = await api.get('/auth/csrf/');
     const csrfToken = response.headers['x-csrftoken'];
     if (csrfToken) {
-      config.headers['X-CSRFToken'] = csrfToken;
+      api.defaults.headers.common['X-CSRFToken'] = csrfToken;
       devPrint('CSRF token updated:', csrfToken);
     }
   } catch (error) {
     devPrint('Failed to fetch CSRF token:', error);
   }
-  return config;
 };
 let cond = false;
 api.interceptors.request.use(async (config) => {
@@ -27,7 +26,8 @@ api.interceptors.request.use(async (config) => {
   }
   if (!cond && !api.defaults.headers.common['X-CSRFToken']) {
     cond = true;
-    return await getCSRF(config);
+    await getCSRF();
+    return config;
   }
   return config;
 });

@@ -1,3 +1,5 @@
+import { parseAnyDate } from '../localization';
+import type { Member, RawMemberData } from '../types';
 import { devPrint } from '../utils';
 import api, { getCSRF } from './api';
 
@@ -20,6 +22,8 @@ export const login = async ({
   if (response.status !== 200) {
     throw new Error(`Login failed: ${response.data.detail ?? 'Unknown error'}`);
   }
+
+  await getCSRF();
 
   return true;
 };
