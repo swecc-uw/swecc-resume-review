@@ -1,6 +1,6 @@
 <script lang="ts">
-  import FileUpload from '../../components/FileUpload.svelte';
-  import { getPresignedUrl, uploadFile } from '../../services/fileUpload';
+  import FileUpload from '../../../components/FileUpload.svelte';
+  import { getPresignedUrl, uploadFile } from '../../../services/fileUpload';
 
   let fileInput: HTMLInputElement;
 

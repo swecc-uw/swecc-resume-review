@@ -1,5 +1,11 @@
-<script>
-  // Add any necessary script logic here
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  export let data;
+
+  onMount(() => {
+    console.log(data);
+  })
 </script>
 
 <div class="flex items-center justify-center h-screen">

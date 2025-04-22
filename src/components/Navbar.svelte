@@ -3,7 +3,7 @@
   import { getCurrentUser } from '../services/member';
   import { goto } from '$app/navigation';
   import { logout } from '../services/auth';
-  let isMenuOpen = false;
+  let isMenuOpen = $state(false);
   let member = $state();
 
   const toggleMenu = () => {
@@ -32,7 +32,7 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-5">
         <button onclick={() => goto('#my-resumes')} class="hover:underline">My Resumes</button>
-        <button onclick={() => goto('/upload')} class="hover:underline">Review</button>
+        <button onclick={() => goto('/app/upload')} class="hover:underline">Review</button>
         {#if member}
           <button onclick={() => goto('/profile')} class="hover:underline">Profile</button>
         {/if}
@@ -74,7 +74,7 @@
   {#if isMenuOpen}
     <div class="md:hidden bg-blue-700">
       <a href="/all" class="block px-4 py-2 hover:bg-blue-600 hover:underline">My Resumes</a>
-      <a href="/upload" class="block px-4 py-2 hover:bg-blue-600 hover:underline">Review</a>
+      <a href="/app/upload" class="block px-4 py-2 hover:bg-blue-600 hover:underline">Review</a>
       <a href="/login" class="block px-4 py-2 hover:bg-blue-600 hover:underline">Login</a>
       <a href="/register" class="block px-4 py-2 hover:bg-blue-600 hover:underline">Register</a>
     </div>

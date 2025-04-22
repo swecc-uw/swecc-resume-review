@@ -1,9 +1,6 @@
 <script>
   import { goto } from '$app/navigation';
 
-  function handleLogin() {
-    alert('Login button clicked!');
-  }
 </script>
 
 <div class="flex flex-col justify-center items-center h-screen">
