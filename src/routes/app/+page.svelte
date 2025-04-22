@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { getWebSocketToken, getWebSocket } from '../../services/websocket.js';
 
-  export let data;
-
-  onMount(() => {
-    console.log(data);
+  onMount(async () => {
+    const token = await getWebSocketToken();
+    const ws = getWebSocket(token);
   })
+
+  
 </script>
 
 <div class="flex items-center justify-center h-screen">

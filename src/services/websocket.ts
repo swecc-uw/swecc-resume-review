@@ -1,7 +1,13 @@
 import api from './api';
 
-const authenticateWebSocket = async () => {
+export const getWebSocketToken = async () => {
+  if (localStorage.getItem('ws_token')) {
+    return localStorage.getItem('ws_token');
+  }
+
   const response = await api.get('/auth/jwt');
+
+  console.log(response);
 
   if (response.status !== 200) {
     throw new Error(
@@ -10,15 +16,18 @@ const authenticateWebSocket = async () => {
   }
 
   const token = response.data.token;
+
+  console.log(response.data.token);
   if (!token) {
     throw new Error('No token received');
   }
 
   localStorage.setItem('ws_token', token);
+  return token;
 };
 
-const getWebSocket = (token: string) => {
-  const ws = new WebSocket(`ws://localhost:8000/ws/chat/?token=${token}`);
+export const getWebSocket = (token: string) => {
+  const ws = new WebSocket(`ws://localhost:8004/ws/echo/${token}`);
 
   ws.onopen = () => {
     console.log('WebSocket connection opened');
