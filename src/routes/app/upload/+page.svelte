@@ -1,14 +1,25 @@
 <script lang="ts">
   import FileUpload from '../../../components/FileUpload.svelte';
-  import { getPresignedUrl, uploadFile } from '../../../services/fileUpload';
+  import { devPublishToReview, getPresignedUrl, uploadFile } from '../../../services/fileUpload';
 
   let fileInput: HTMLInputElement;
 
   const handleSubmit = async () => {
-    const file = fileInput.files?.[0];
-    const presignedUrl = await getPresignedUrl(file!.name, file!.size);
-    console.log(presignedUrl)
-    await uploadFile(file!, presignedUrl);
+    if (!fileInput.files || fileInput.files.length === 0) {
+      alert('Please select a file to upload.');
+      return;
+    }
+    if (fileInput.files.length > 1) {
+      alert('Please select only one file to upload.');
+      return;
+    }
+
+    const file = fileInput.files[0];
+    const {presignedUrl, key} = await getPresignedUrl(file!.name, file!.size);
+    await uploadFile(file, presignedUrl);
+    if (import.meta.env.DEV) {
+      await devPublishToReview(key);
+    }
   };
 
 </script>

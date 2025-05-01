@@ -21,7 +21,7 @@ export const uploadFile = async (
 export const getPresignedUrl = async (
   fileName: string,
   fileSize: number
-): Promise<string> => {
+): Promise<{ key: string; presignedUrl: string }> => {
   const response = await api.post('/resume/upload/', {
     file_name: fileName,
     file_size: fileSize / 1024, // Convert to KB
@@ -30,5 +30,22 @@ export const getPresignedUrl = async (
     throw new Error(`Failed to get presigned URL: ${response.statusText}`);
   }
 
-  return response.data.presigned_url;
+  return { ...response.data, presignedUrl: response.data.presigned_url };
+};
+
+export const devPublishToReview = async (key: string) => {
+  if (!import.meta.env.DEV) {
+    console.error('devPublishToReview can only be called in development mode');
+    return;
+  }
+
+  const response = await api.post('/resume/publish-to-review/', {
+    key,
+  });
+
+  if (response.status !== 200) {
+    throw new Error(`Failed to publish to review: ${response.statusText}`);
+  }
+
+  return response.data;
 };

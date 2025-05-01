@@ -1,10 +1,6 @@
 import api from './api';
 
 export const getWebSocketToken = async () => {
-  if (localStorage.getItem('ws_token')) {
-    return localStorage.getItem('ws_token');
-  }
-
   const response = await api.get('/auth/jwt');
 
   console.log(response);
@@ -27,7 +23,7 @@ export const getWebSocketToken = async () => {
 };
 
 export const getWebSocket = (token: string) => {
-  const ws = new WebSocket(`ws://localhost:8004/ws/echo/${token}`);
+  const ws = new WebSocket(`ws://localhost:8004/ws/resume/${token}`);
 
   ws.onopen = () => {
     console.log('WebSocket connection opened');
