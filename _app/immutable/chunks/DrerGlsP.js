@@ -1,0 +1,1 @@
+import{a,g as s}from"./Cfd7_EqS.js";const e=async({username:t,password:r})=>{const o=await a.post("/auth/login/",{username:t,password:r});if(o.status!==200)throw new Error(`Login failed: ${o.data.detail??"Unknown error"}`);return await s(),!0},i=async()=>{if((await a.post("/auth/logout/")).status!==200)throw new Error("Logout failed");return!0};export{i as a,e as l};
