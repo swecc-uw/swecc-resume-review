@@ -49,6 +49,22 @@ export interface RawMemberData {
     profile_picture_url?: string;
 }
 
+export interface RawResumeData {
+    id: number;
+    file_name: string;
+    file_size: number;
+    created_at: string;
+    feedback: string;
+}
+
+export interface Resume {
+    id: number;
+    fileName: string;
+    fileSize: number;
+    createdAt: Date;
+    feedback: string;
+}
+
 export enum ResumeReviewStatus {
     PENDING = "PENDING",
     IN_PROGRESS = "IN_PROGRESS",

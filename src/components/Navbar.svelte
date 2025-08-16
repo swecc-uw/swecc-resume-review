@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { getCurrentUser } from "../services/member";
     import { goto } from "$app/navigation";
     import { logout } from "../services/auth";
     import { base } from "$app/paths";
+    import { currentUser, loadCurrentUser } from "../services/userStore";
+
     let isMenuOpen = $state(false);
-    let member = $state();
 
     const toggleMenu = () => {
         isMenuOpen = !isMenuOpen;
@@ -13,12 +13,11 @@
 
     const handleLogout = async () => {
         await logout();
-        member = null;
         goto("/");
     };
 
     onMount(async () => {
-        member = await getCurrentUser();
+        await loadCurrentUser();
     });
 </script>
 
@@ -32,21 +31,21 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex space-x-5">
-                <button
-                    onclick={() => goto("#my-resumes")}
-                    class="hover:underline">My Resumes</button
-                >
-                <button
-                    onclick={() => goto(`${base}/app/upload`)}
-                    class="hover:underline">Review</button
-                >
-                {#if member}
+                {#if $currentUser}
+                    <button
+                        onclick={() => goto(`${base}/app`)}
+                        class="hover:underline">My Resumes</button
+                    >
+                    <button
+                        onclick={() => goto(`${base}/app/upload`)}
+                        class="hover:underline">Upload</button
+                    >
                     <button
                         onclick={() => goto(`${base}/app/profile`)}
                         class="hover:underline">Profile</button
                     >
                 {/if}
-                {#if member}
+                {#if $currentUser}
                     <button onclick={handleLogout} class="hover:underline"
                         >Logout</button
                     >
