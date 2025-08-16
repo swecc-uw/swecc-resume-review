@@ -1,8 +1,10 @@
 import api from "./api";
 
 export const getWebSocketToken = async () => {
-    if (localStorage.getItem("ws_token")) {
-        return localStorage.getItem("ws_token");
+    const storedToken = localStorage.getItem("ws_token") || "{}";
+    const parsedToken = JSON.parse(storedToken);
+    if (parsedToken.token && parsedToken.expiry > Date.now()) {
+        return parsedToken.token;
     }
 
     const response = await api.get("/auth/jwt");
@@ -22,7 +24,13 @@ export const getWebSocketToken = async () => {
         throw new Error("No token received");
     }
 
-    localStorage.setItem("ws_token", token);
+    localStorage.setItem(
+        "ws_token",
+        JSON.stringify({
+            token,
+            expiry: Date.now() + 3600 * 1000, // Token valid for 1 hour
+        })
+    );
     return token;
 };
 
