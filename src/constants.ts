@@ -1,7 +1,7 @@
 export const LOCAL_API_ENDPOINT = "http://localhost:8000/";
 export const PROD_API_ENDPOINT = "https://api.swecc.org"; // no slash on purpose
 export const LOCAL_WS_ENDPOINT = "ws://localhost:8004/ws"; // no slash on purpose
-export const PROD_WS_ENDPOINT = "ws://api.swecc.org/ws"; // no slash on purpose
+export const PROD_WS_ENDPOINT = "wss://api.swecc.org/ws"; // no slash on purpose
 export const LEETCODE_API_BASE_URL = "https://alfa-leetcode-api.onrender.com/";
 export const GITHUB_PROFILE_BASE_URL = "https://github.com/";
 export const LINKEDIN_PROFILE_BASE_URL = "https://linkedin.com/in/";
