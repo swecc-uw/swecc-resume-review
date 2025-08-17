@@ -7,6 +7,7 @@
     import { getResumes } from "../../services/resume.js";
     import ResumeFeedback from "../../components/ResumeFeedback.svelte";
     import type { Resume } from "../../types";
+    import { base } from "$app/paths";
 
     let ws: WebSocket;
     let resumes: Resume[] = $state([]);
@@ -77,7 +78,7 @@
                     </div>
                     <p class="text-gray-600 text-sm">No resumes uploaded yet</p>
                     <a
-                        href="/app/upload"
+                        href={`${base}/app/upload`}
                         class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
                     >
                         Upload your first resume →

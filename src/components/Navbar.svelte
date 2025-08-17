@@ -93,22 +93,22 @@
     {#if isMenuOpen}
         <div class="md:hidden bg-blue-700">
             <a
-                href="/all"
+                href={`${base}/app`}
                 class="block px-4 py-2 hover:bg-blue-600 hover:underline"
                 >My Resumes</a
             >
             <a
-                href="/app/upload"
+                href={`${base}/app/upload`}
                 class="block px-4 py-2 hover:bg-blue-600 hover:underline"
                 >Review</a
             >
             <a
-                href="/login"
+                href={`${base}/login`}
                 class="block px-4 py-2 hover:bg-blue-600 hover:underline"
                 >Login</a
             >
             <a
-                href="/register"
+                href={`${base}/register`}
                 class="block px-4 py-2 hover:bg-blue-600 hover:underline"
                 >Register</a
             >

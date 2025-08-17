@@ -8,7 +8,7 @@
 
     const handleLogin = async () => {
         if (await login({ username, password })) {
-            goto("/app");
+            goto(`${base}/app`);
         }
     };
 </script>
