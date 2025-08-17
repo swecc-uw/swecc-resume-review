@@ -1,3 +1,4 @@
+import { LOCAL_WS_ENDPOINT, PROD_WS_ENDPOINT } from "../constants";
 import api from "./api";
 
 export const getWebSocketToken = async () => {
@@ -35,7 +36,11 @@ export const getWebSocketToken = async () => {
 };
 
 export const getWebSocket = (token: string) => {
-    const ws = new WebSocket(`ws://localhost:8004/ws/resume/${token}`);
+    const ws = new WebSocket(
+        `${
+            import.meta.env.DEV ? LOCAL_WS_ENDPOINT : PROD_WS_ENDPOINT
+        }/resume/${token}`
+    );
     ws.onopen = () => {
         console.log("WebSocket connection opened");
     };
