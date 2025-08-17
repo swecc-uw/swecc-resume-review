@@ -8,6 +8,8 @@
     import ResumeFeedback from "../../components/ResumeFeedback.svelte";
     import type { Resume } from "../../types";
     import { base } from "$app/paths";
+    import { currentUser } from "../../services/userStore.js";
+    import { goto } from "$app/navigation";
 
     let ws: WebSocket;
     let resumes: Resume[] = $state([]);

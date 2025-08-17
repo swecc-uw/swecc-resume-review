@@ -1,6 +1,9 @@
 import { writable } from "svelte/store";
 import type { Member } from "../types";
 import { getCurrentUser } from "./member";
+import { redirect } from "@sveltejs/kit";
+import { goto } from "$app/navigation";
+import { base } from "$app/paths";
 
 // Create a writable store for the current user
 export const currentUser = writable<Member | null>(null);

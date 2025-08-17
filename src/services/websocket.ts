@@ -1,4 +1,5 @@
 import { LOCAL_WS_ENDPOINT, PROD_WS_ENDPOINT } from "../constants";
+import { devPrint } from "../utils";
 import api from "./api";
 
 export const getWebSocketToken = async () => {
@@ -10,7 +11,7 @@ export const getWebSocketToken = async () => {
 
     const response = await api.get("/auth/jwt");
 
-    console.log(response);
+    devPrint(response);
 
     if (response.status !== 200) {
         throw new Error(
@@ -20,7 +21,7 @@ export const getWebSocketToken = async () => {
 
     const token = response.data.token;
 
-    console.log(response.data.token);
+    devPrint(response.data.token);
     if (!token) {
         throw new Error("No token received");
     }
@@ -42,11 +43,11 @@ export const getWebSocket = (token: string) => {
         }/resume/${token}`
     );
     ws.onopen = () => {
-        console.log("WebSocket connection opened");
+        devPrint("WebSocket connection opened");
     };
 
     ws.onclose = () => {
-        console.log("WebSocket connection closed");
+        devPrint("WebSocket connection closed");
     };
 
     ws.onerror = (error) => {

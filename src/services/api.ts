@@ -13,10 +13,10 @@ export const getCSRF = async () => {
         const csrfToken = response.headers["x-csrftoken"];
         if (csrfToken) {
             api.defaults.headers.common["X-CSRFToken"] = csrfToken;
-            console.log("CSRF token updated:", csrfToken);
+            devPrint("CSRF token updated:", csrfToken);
         }
     } catch (error) {
-        console.log("Failed to fetch CSRF token:", error);
+        devPrint("Failed to fetch CSRF token:", error);
     }
 };
 let cond = false;
