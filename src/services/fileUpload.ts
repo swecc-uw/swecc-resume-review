@@ -8,6 +8,9 @@ export const uploadFile = async (
     const options = {
         method: "PUT",
         body: file,
+        headers: {
+            "Content-Type": "application/pdf",
+        },
     };
 
     return await fetch(presignedUrl, options).then((response) => {
