@@ -5,5 +5,5 @@ const dev = process.argv.includes("dev");
 
 export default defineConfig({
     plugins: [sveltekit()],
-    base: dev ? "" : "/swecc-resume-review/",
+    base: dev ? "" : "/swecc-resume-review",
 });
