@@ -11,7 +11,14 @@ export async function load({ fetch }: LoadEvent) {
         : PROD_API_ENDPOINT;
     const response = await fetch(`${baseURL}/members/profile`);
 
+    console.log("Response from /members/profile:", response);
+
     if (!response.ok) {
+        console.log(
+            "Failed to fetch user data:",
+            response.status,
+            response.statusText
+        );
         throw redirect(302, `${base}/login`);
     }
 
