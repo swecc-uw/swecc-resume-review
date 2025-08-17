@@ -43,15 +43,15 @@ export const getWebSocket = (token: string) => {
         }/resume/${token}`
     );
     ws.onopen = () => {
-        devPrint("WebSocket connection opened");
+        console.log("WebSocket connection opened");
     };
 
     ws.onclose = () => {
-        devPrint("WebSocket connection closed");
+        console.log("WebSocket connection closed");
     };
 
     ws.onerror = (error) => {
-        console.error("WebSocket error:", error);
+        console.log("WebSocket error:", error);
     };
 
     return ws;

@@ -36,6 +36,7 @@
         if (import.meta.env.DEV) {
             await devPublishToReview(key);
         }
+        console.log("File uploaded successfully:", file.name);
         resumeReviewStatus = ResumeReviewStatus.IN_PROGRESS;
     };
 
