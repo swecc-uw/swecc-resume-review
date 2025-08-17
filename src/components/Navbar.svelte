@@ -13,7 +13,7 @@
 
     const handleLogout = async () => {
         await logout();
-        goto("/");
+        goto(`${base}/login`);
     };
 
     onMount(async () => {
@@ -32,31 +32,26 @@
             <!-- Desktop Navigation -->
             <div class="hidden md:flex space-x-5">
                 {#if $currentUser}
-                    <button
-                        onclick={() => goto(`${base}/app`)}
-                        class="hover:underline">My Resumes</button
+                    <a href={`${base}/app`} class="hover:underline"
+                        >My Resumes</a
                     >
-                    <button
-                        onclick={() => goto(`${base}/app/upload`)}
-                        class="hover:underline">Upload</button
+                    <a href={`${base}/app/upload`} class="hover:underline"
+                        >Upload</a
                     >
-                    <button
-                        onclick={() => goto(`${base}/app/profile`)}
-                        class="hover:underline">Profile</button
+                    <a href={`${base}/app/profile`} class="hover:underline"
+                        >Profile</a
                     >
                 {/if}
                 {#if $currentUser}
-                    <button onclick={handleLogout} class="hover:underline"
+                    <button
+                        onclick={handleLogout}
+                        class="hover:underline bg-transparent border-none text-white cursor-pointer"
                         >Logout</button
                     >
                 {:else}
-                    <button
-                        onclick={() => goto(`${base}/login`)}
-                        class="hover:underline">Login</button
-                    >
-                    <button
-                        onclick={() => goto(`${base}/register`)}
-                        class="hover:underline">Register</button
+                    <a href={`${base}/login`} class="hover:underline">Login</a>
+                    <a href={`${base}/register`} class="hover:underline"
+                        >Register</a
                     >
                 {/if}
             </div>
